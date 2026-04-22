@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fatCoinCapital | Live Market Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        #sidebar { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
+        #sidebar.open { transform: translateX(0); }
+        #overlay { transition: opacity 0.3s ease; pointer-events: none; opacity: 0; }
+        #overlay.open { pointer-events: auto; opacity: 1; }
+        .modal { transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; opacity: 0; transform: scale(0.95); }
+        .modal.open { pointer-events: auto; opacity: 1; transform: scale(1); }
+        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .ticker-content { display: inline-block; white-space: nowrap; animation: ticker 35s linear infinite; }
+        
+        .feed-card { transition: transform 0.3s ease; border-radius: 2.5rem; overflow: hidden; background: white; border: 1px solid #f3f4f6; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
+        .feed-card:hover { transform: translateY(-5px); }
+
+        .market-terminal { border-radius: 2.5rem; background: #0a0b0d; border: 1px solid #1f2937; overflow: hidden; margin-bottom: 2.5rem; }
+    </style>
+</head>
+<body class="bg-white text-gray-900 overflow-x-hidden">
+
+    <script src="https://widgets.coingecko.com/gecko-coin-ticker-widget.js"></script>
+    <script src="https://widgets.coingecko.com/gecko-coin-converter-widget.js"></script>
+
+    <div id="overlay" onclick="closeAll()" class="fixed inset-0 bg-black/40 z-[60] backdrop-blur-sm"></div>
+
+    <div id="signupModal" class="modal fixed inset-0 z-[80] flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-[2.5rem] p-8 md:p-10 shadow-2xl relative">
+            <button onclick="closeAll()" class="absolute top-6 right-6 p-2 hover:bg-gray-100 rounded-full transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h2 class="text-3xl font-black uppercase mb-2">Create Account</h2>
+            <p class="text-gray-500 text-sm mb-8">Join fatCoinCapital for secure market access.</p>
+            <form id="registrationForm" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 ml-2">Full Name</label>
+                    <input type="text" id="regName" placeholder="Enter full name" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 ml-2">Email Address</label>
+                    <input type="email" placeholder="name@email.com" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 ml-2">Password</label>
+                    <input type="password" placeholder="••••••••" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition">
+                </div>
+                <button type="submit" class="w-full py-5 bg-[#2b59ff] text-white rounded-2xl font-black uppercase tracking-widest shadow-lg hover:bg-blue-700 transition mt-4">Register Now</button>
+            </form>
+            <p class="text-center text-xs text-gray-400 mt-6 uppercase font-bold tracking-tighter">Already a member? <a href="#" onclick="openModal('login')" class="text-blue-600 underline">Login here</a></p>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal fixed inset-0 z-[80] flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-[2.5rem] p-8 md:p-10 shadow-2xl relative">
+            <button onclick="closeAll()" class="absolute top-6 right-6 p-2 hover:bg-gray-100 rounded-full transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h2 class="text-3xl font-black uppercase mb-2">Welcome Back</h2>
+            <p class="text-gray-500 text-sm mb-8">Access your investment terminal.</p>
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 ml-2">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="name@email.com" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 ml-2">Password</label>
+                    <input type="password" placeholder="••••••••" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition">
+                </div>
+                <button type="submit" class="w-full py-5 bg-[#2b59ff] text-white rounded-2xl font-black uppercase tracking-widest shadow-lg hover:bg-blue-700 transition mt-4">Sign In</button>
+            </form>
+            <p class="text-center text-xs text-gray-400 mt-6 uppercase font-bold tracking-tighter">New here? <a href="#" onclick="openModal('signup')" class="text-blue-600 underline">Create account</a></p>
+        </div>
+    </div>
+
+    <aside id="sidebar" class="fixed top-0 right-0 h-full w-[300px] bg-white z-[70] shadow-2xl flex flex-col border-l border-gray-100">
+        <div class="p-6 flex justify-between items-center border-b border-gray-50">
+            <span class="font-bold text-xl tracking-tight text-blue-600 uppercase">Menu</span>
+            <button onclick="closeAll()" class="p-2 hover:bg-gray-100 rounded-full transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <nav class="p-6 space-y-6 flex-1 overflow-y-auto">
+            <div class="space-y-3">
+                <button onclick="openModal('signup')" class="w-full py-4 px-6 bg-[#2b59ff] text-white rounded-2xl font-bold text-center uppercase tracking-wide">Sign up</button>
+                <button onclick="openModal('login')" class="w-full py-4 px-6 bg-gray-100 text-gray-900 rounded-2xl font-bold text-center uppercase tracking-wide">Sign in</button>
+            </div>
+            <div class="flex flex-col gap-3 pt-4 border-t border-gray-50">
+                <button class="flex items-center justify-between w-full p-5 bg-[#2b59ff] text-white rounded-2xl shadow-md uppercase text-xs font-bold tracking-wider">Chat Support <span>💬</span></button>
+                <button class="flex items-center justify-between w-full p-5 bg-[#2b59ff] text-white rounded-2xl shadow-md uppercase text-xs font-bold tracking-wider">Community <span>🤝</span></button>
+                <button class="flex items-center justify-between w-full p-5 bg-[#2b59ff] text-white rounded-2xl shadow-md uppercase text-xs font-bold tracking-wider">Market Blog <span>✍️</span></button>
+            </div>
+        </nav>
+    </aside>
+
+    <header class="sticky top-0 bg-white/95 backdrop-blur-md z-50 px-4 py-4 border-b border-gray-100">
+        <nav class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-[#2b59ff] rounded-full flex items-center justify-center text-white font-bold text-sm">f</div>
+                <span class="text-xl font-bold tracking-tight">fatCoinCapital</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="openModal('signup')" class="bg-[#2b59ff] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-blue-700 transition">Sign Up</button>
+                <button onclick="toggleMenu()" class="p-2.5 text-gray-800 bg-gray-50 rounded-xl border border-gray-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="mainContent" class="max-w-6xl mx-auto px-4 pb-24">
+        <div class="pt-8">
+            <div class="market-terminal p-6 md:p-10 shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    <div class="lg:col-span-2">
+                        <gecko-coin-ticker-widget coin-id="bitcoin" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-ticker-widget>
+                    </div>
+                    <div class="lg:col-span-1 bg-white/5 p-6 rounded-3xl border border-gray-800">
+                        <p class="text-[10px] font-black uppercase text-blue-500 mb-4 tracking-widest text-center">BTC Converter</p>
+                        <gecko-coin-converter-widget coin-id="bitcoin" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-converter-widget>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-terminal p-6 md:p-10 shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    <div class="lg:col-span-2">
+                        <gecko-coin-ticker-widget coin-id="ethereum" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-ticker-widget>
+                    </div>
+                    <div class="lg:col-span-1 bg-white/5 p-6 rounded-3xl border border-gray-800">
+                        <p class="text-[10px] font-black uppercase text-blue-500 mb-4 tracking-widest text-center">ETH Converter</p>
+                        <gecko-coin-converter-widget coin-id="ethereum" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-converter-widget>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-terminal p-6 md:p-10 shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    <div class="lg:col-span-2">
+                        <gecko-coin-ticker-widget coin-id="solana" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-ticker-widget>
+                    </div>
+                    <div class="lg:col-span-1 bg-white/5 p-6 rounded-3xl border border-gray-800">
+                        <p class="text-[10px] font-black uppercase text-blue-500 mb-4 tracking-widest text-center">SOL Converter</p>
+                        <gecko-coin-converter-widget coin-id="solana" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-converter-widget>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-terminal p-6 md:p-10 shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    <div class="lg:col-span-2">
+                        <gecko-coin-ticker-widget coin-id="tether-gold" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-ticker-widget>
+                    </div>
+                    <div class="lg:col-span-1 bg-white/5 p-6 rounded-3xl border border-gray-800">
+                        <p class="text-[10px] font-black uppercase text-blue-500 mb-4 tracking-widest text-center">XAUT Converter</p>
+                        <gecko-coin-converter-widget coin-id="tether-gold" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-converter-widget>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-[#0a0a0a] text-white rounded-[2.5rem] px-8 py-10 mb-16 shadow-2xl">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-2xl font-black uppercase">Daily News Feed</h3>
+                <span class="flex items-center gap-2 text-[11px] font-bold text-blue-400 uppercase">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> Streaming Live News
+                </span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white/5 border border-gray-800 p-6 rounded-[2rem]">
+                    <span class="text-[10px] bg-red-500/20 text-red-400 px-2 py-1 rounded font-bold mb-3 inline-block">CRITICAL</span>
+                    <h4 class="font-bold text-white mb-2 uppercase">Drift Heist</h4>
+                    <p class="text-gray-400 text-xs">Major exploit on Solana triggers investigation.</p>
+                </div>
+                <div class="bg-white/5 border border-gray-800 p-6 rounded-[2rem]">
+                    <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-1 rounded font-bold mb-3 inline-block">INSTITUTIONAL</span>
+                    <h4 class="font-bold text-white mb-2 uppercase">Morgan Stanley</h4>
+                    <p class="text-gray-400 text-xs">ETF launch boosts liquidity expectations.</p>
+                </div>
+                <div class="bg-white/5 border border-gray-800 p-6 rounded-[2rem]">
+                    <span class="text-[10px] bg-green-500/20 text-green-400 px-2 py-1 rounded font-bold mb-3 inline-block">ANALYSIS</span>
+                    <h4 class="font-bold text-white mb-2 uppercase">Consolidation</h4>
+                    <p class="text-gray-400 text-xs">Market weighs geopolitical tensions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-20">
+            <h3 class="text-3xl font-black uppercase mb-10 text-center tracking-tighter">Terminal Intelligence Feed</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="feed-card shadow-lg">
+                    <img src="asset-growth.png" alt="Asset Growth" class="w-full aspect-video object-cover">
+                    <div class="p-8">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                            <p class="text-[10px] font-black uppercase text-gray-400 tracking-widest">Performance Update</p>
+                        </div>
+                        <h4 class="text-2xl font-black uppercase mb-3">Compounding Velocity</h4>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6 font-medium">Automated capital velocity management for every 7-day cycle.</p>
+                        <button onclick="openModal('signup')" class="text-blue-600 font-black uppercase text-xs tracking-widest underline">Learn More</button>
+                    </div>
+                </div>
+                <div class="feed-card shadow-lg">
+                    <img src="arbitrage-logic.png" alt="Arbitrage Logic" class="w-full aspect-video object-cover">
+                    <div class="p-8">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                            <p class="text-[10px] font-black uppercase text-gray-400 tracking-widest">Strategy Blueprint</p>
+                        </div>
+                        <h4 class="text-2xl font-black uppercase mb-3">Liquidity Arbitrage</h4>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6 font-medium">Capitalizing on market spreads via 14 top-tier liquidity providers.</p>
+                        <button onclick="openModal('signup')" class="text-blue-600 font-black uppercase text-xs tracking-widest underline">View Strategy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-black text-white py-4 rounded-2xl mb-16 overflow-hidden border-y border-blue-500/20">
+            <div id="scrollingTicker" class="ticker-content font-bold text-xs tracking-widest uppercase">
+                <span class="mx-10 text-blue-500">LIVE FEED:</span>
+                <span>BTC TRADING AT $66,804.14</span>
+                <span class="mx-10 text-green-400">CLAIM <span class="liveBonusText">$200</span> BONUS ON SIGN-UP</span>
+            </div>
+        </div>
+
+        <div class="mb-10">
+            <h3 class="text-3xl font-black mb-10 text-center uppercase">How fatCoinCapital Works</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-8 rounded-[2.5rem] bg-[#2b59ff] text-white shadow-xl">
+                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-6">🏛️</div>
+                    <h3 class="font-bold mb-2 uppercase text-sm">1. Digital Wealth Infrastructure</h3>
+                    <p class="text-white/80 text-[10px]">Automated performance tracking and secure infra.</p>
+                </div>
+                <div class="p-8 rounded-[2.5rem] bg-[#2b59ff] text-white shadow-xl">
+                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-6">⚙️</div>
+                    <h3 class="font-bold mb-2 uppercase text-sm">2. Smart Investment Engine</h3>
+                    <p class="text-white/80 text-[10px]">Strategic allocation into crypto opportunities.</p>
+                </div>
+                <div class="p-8 rounded-[2.5rem] bg-[#2b59ff] text-white shadow-xl">
+                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-6">📱</div>
+                    <h3 class="font-bold mb-2 uppercase text-sm">3. Beginner Dashboard</h3>
+                    <p class="text-white/80 text-[10px]">Track growth with high-clarity interface.</p>
+                </div>
+                <div class="p-8 rounded-[2.5rem] bg-[#2b59ff] text-white shadow-xl">
+                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-6">📅</div>
+                    <h3 class="font-bold mb-2 uppercase text-sm">4. 7-Day Yield Plans</h3>
+                    <p class="text-white/80 text-[10px]">Short-term cycles with profit distribution.</p>
+                </div>
+                <div class="p-8 rounded-[2.5rem] border-4 border-[#2b59ff] bg-white text-blue-900 shadow-2xl">
+                    <div class="w-10 h-10 bg-[#2b59ff] text-white rounded-xl flex items-center justify-center mb-6">🎁</div>
+                    <h3 class="font-bold mb-2 uppercase text-sm">5. Instant <span class="liveBonusText">$200</span> Bonus</h3>
+                    <p class="text-gray-600 text-[10px] font-medium">Starting balance immediately upon registration.</p>
+                </div>
+                <div class="p-8 rounded-[2.5rem] bg-[#2b59ff] text-white shadow-xl">
+                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-6">📑</div>
+                    <h3 class="font-bold mb-2 uppercase text-sm">6. Real-Time History</h3>
+                    <p class="text-white/80 text-[10px]">Full transparency for every deposit.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- SIXTEE COMMAND SYNC ---
+        window.onload = function() {
+            // 1. Check Maintenance Mode
+            if (localStorage.getItem('fcc_maint_mode') === 'ON') {
+                document.getElementById('mainContent').innerHTML = `
+                    <div style="height:70vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:20px;">
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:50px; border-radius:3rem; max-width:500px;">
+                            <h1 style="font-size:28px; font-weight:900; color:#1e293b; margin-bottom:15px;">SYSTEM UPGRADE</h1>
+                            <p style="color:#64748b; font-size:14px; font-weight:500;">Terminal access is temporarily suspended for institutional maintenance. Please check back shortly.</p>
+                            <div style="margin-top:25px; height:4px; width:50px; background:#2b59ff; margin:25px auto; border-radius:10px;"></div>
+                        </div>
+                    </div>
+                `;
+                return; 
+            }
+
+            // 2. Sync Global Ticker Message
+            const tickerMsg = localStorage.getItem('fcc_ticker_msg');
+            if(tickerMsg) {
+                document.getElementById('scrollingTicker').innerHTML = `
+                    <span class="mx-10 text-blue-500">LIVE FEED:</span>
+                    <span>${tickerMsg}</span>
+                `;
+            }
+
+            // 3. Sync Bonus Amounts
+            const bonusAmt = localStorage.getItem('fcc_bonus_amt') || "200";
+            document.querySelectorAll('.liveBonusText').forEach(el => {
+                el.innerText = "$" + bonusAmt;
+            });
+        };
+
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('open');
+        }
+        function openModal(type) {
+            closeAll();
+            document.getElementById(type + 'Modal').classList.add('open');
+            document.getElementById('overlay').classList.add('open');
+        }
+        function closeAll() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('signupModal').classList.remove('open');
+            document.getElementById('loginModal').classList.remove('open');
+            document.getElementById('overlay').classList.remove('open');
+        }
+        document.getElementById('registrationForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            if(name.trim() !== "") {
+                localStorage.setItem('fatCoinUser', name);
+                window.location.href = 'dashboard.html';
+            }
+        };
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            localStorage.setItem('fatCoinUser', email.split('@')[0]);
+            window.location.href = 'dashboard.html';
+        };
+    </script>
+</body>
+</html>

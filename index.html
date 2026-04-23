@@ -313,18 +313,24 @@
             document.getElementById('loginModal').classList.remove('open');
             document.getElementById('overlay').classList.remove('open');
         }
+
+        // --- UPDATED FORM HANDLING ---
         document.getElementById('registrationForm').onsubmit = function(e) {
             e.preventDefault();
             const name = document.getElementById('regName').value;
             if(name.trim() !== "") {
-                localStorage.setItem('fatCoinUser', name);
+                // Key updated to 'userFullName' to match dashboard retrieval
+                localStorage.setItem('userFullName', name);
                 window.location.href = 'dashboard.html';
             }
         };
+
         document.getElementById('loginForm').onsubmit = function(e) {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
-            localStorage.setItem('fatCoinUser', email.split('@')[0]);
+            // Uses stored name if available, otherwise defaults to email prefix
+            const existingName = localStorage.getItem('userFullName') || email.split('@')[0];
+            localStorage.setItem('userFullName', existingName);
             window.location.href = 'dashboard.html';
         };
     </script>

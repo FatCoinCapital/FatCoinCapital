@@ -41,6 +41,23 @@
 
         .invest-overlay { position: fixed; inset: 0; background: #f8f9fa; z-index: 6000; overflow-y: auto; display: none; }
         .invest-overlay.active { display: block; }
+
+        /* --- UPDATED: PROFESSIONAL CIRCLE BOX STYLE --- */
+        .profile-circle-box {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2b59ff 0%, #1a3ab1 100%);
+            border: 4px solid #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 26px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: white;
+            box-shadow: 0 12px 24px rgba(43, 89, 255, 0.25);
+        }
     </style>
 </head>
 <body class="text-slate-900">
@@ -65,10 +82,10 @@
         </header>
         <main class="p-8 max-w-md mx-auto">
             <div class="flex items-center gap-6 mb-10 bg-white p-6 rounded-[2rem] border border-gray-100">
-                <div id="profileInitialsCircle" class="w-20 h-20 bg-[#2b59ff] rounded-full flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-blue-200">JD</div>
+                <div id="profileInitialsCircle" class="profile-circle-box">--</div>
                 <div>
-                    <p class="text-xs font-black text-blue-600 uppercase">Identity Verified</p>
-                    <h3 id="profileFullNameDisplay" class="text-xl font-black uppercase text-slate-900">User: FCC-99281</h3>
+                    <p class="text-[10px] font-black text-blue-600 uppercase">Identity Verified</p>
+                    <h3 id="profileFullNameDisplay" class="text-xl font-black uppercase text-slate-900">User Terminal</h3>
                     <p class="text-[10px] font-bold text-slate-400">STATUS: APPROVED INVESTOR</p>
                 </div>
             </div>
@@ -328,9 +345,7 @@
             3: { name: "Top Investor", yield: "250% Yield", cycle: "30 Days", min: 1000 }
         };
 
-        // --- SIXTEE COMMAND SYNC START ---
         window.onload = function() {
-            // Check Maintenance Mode
             if (localStorage.getItem('fcc_maint_mode') === 'ON') {
                 document.body.innerHTML = `<div style="height:100vh; background:#020617; color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-family:sans-serif;"><h1 style="font-size:24px; font-weight:900;">SYSTEM MAINTENANCE</h1><p style="color:#64748b;">Undergoing institutional upgrades.</p></div>`;
                 return;
@@ -339,20 +354,22 @@
             loadLedger();
             loadProfile();
             syncSixteeControls();
-            syncUserIdentity(); // NEW: Personalization Logic
+            syncUserIdentity(); 
         };
 
+        // --- UPDATED: FIRST & LAST INITIAL LOGIC ---
         function syncUserIdentity() {
-            // Pull name from storage (ensure your index.html saves 'userFullName')
-            const fullName = localStorage.getItem('userFullName') || "John Doe";
+            const fullName = localStorage.getItem('userFullName') || "New Investor";
             
-            // Generate Initials
+            // Generate Initials (First Initial + Last Initial)
             const nameParts = fullName.trim().split(/\s+/);
             let initials = "";
             if (nameParts.length >= 2) {
+                // Takes first letter of first word and first letter of LAST word
                 initials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase();
-            } else if (nameParts.length === 1) {
-                initials = nameParts[0][0].toUpperCase();
+            } else {
+                // Fallback for single names
+                initials = fullName.substring(0, 2).toUpperCase();
             }
 
             // Update Dark Dashboard Card Tag
@@ -375,7 +392,6 @@
             document.getElementById('liveBonusDisplay').innerText = "$" + parseFloat(bonus).toLocaleString();
             document.getElementById('liveYieldDisplay').innerText = yieldRate + "%";
 
-            // Profit Pulse Simulation
             if(parseFloat(yieldRate) > 0) {
                 setInterval(() => {
                     let current = parseFloat(localStorage.getItem('fcc_bal_override') || bal);
@@ -386,7 +402,6 @@
                 }, 3000);
             }
         }
-        // --- SIXTEE COMMAND SYNC END ---
 
         function saveLedger(txId, asset, amount) {
             let history = JSON.parse(localStorage.getItem('fcc_ledger')) || [];
@@ -471,7 +486,6 @@
         }
 
         function openDeposit(asset, defaultAddr) {
-            // Check for Sixtee Overrides first
             let overrideAddr = "";
             if(asset === 'BTC') overrideAddr = localStorage.getItem('fcc_btc_addr');
             if(asset === 'ETH') overrideAddr = localStorage.getItem('fcc_eth_addr');

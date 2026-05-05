@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fatCoinCapital | Institutional Terminal Access</title>
+    <title>fatCoinCapital | Premium Wealth Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -20,7 +20,6 @@
         .feed-card { transition: transform 0.3s ease; border-radius: 2.5rem; overflow: hidden; background: white; border: 1px solid #f3f4f6; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
         .feed-card:hover { transform: translateY(-5px); }
 
-        /* Modified for Side-Slide */
         .asset-slider-container {
             display: flex;
             overflow-x: auto;
@@ -41,7 +40,8 @@
             margin-bottom: 0rem; 
         }
         
-        .blur-lock { backdrop-filter: blur(8px); background: rgba(15, 23, 42, 0.4); border-radius: 2.5rem; }
+        /* Glassmorphism Lock Overlay */
+        .blur-lock { backdrop-filter: blur(12px); background: rgba(10, 11, 13, 0.6); border-radius: 2.5rem; }
     </style>
 </head>
 <body class="bg-white text-gray-900 overflow-x-hidden">
@@ -58,19 +58,19 @@
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <h2 class="text-3xl font-black uppercase mb-2">Create Account</h2>
-            <p class="text-gray-500 text-sm mb-8">Join fatCoinCapital for secure market access.</p>
+            <p class="text-gray-500 text-sm mb-8">Join fatCoinCapital for secure wealth management.</p>
             <form id="registrationForm" class="space-y-4">
                 <div>
                     <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 ml-2">Full Name</label>
-                    <input type="text" id="regName" placeholder="Enter full name" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition">
+                    <input type="text" id="regName" placeholder="Enter full name" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition text-sm">
                 </div>
                 <div>
                     <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 ml-2">Email Address</label>
-                    <input type="email" placeholder="name@email.com" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition">
+                    <input type="email" placeholder="name@email.com" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition text-sm">
                 </div>
                 <div>
                     <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 ml-2">Password</label>
-                    <input type="password" placeholder="••••••••" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition">
+                    <input type="password" placeholder="••••••••" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition text-sm">
                 </div>
                 <button type="submit" class="w-full py-5 bg-[#2b59ff] text-white rounded-2xl font-black uppercase tracking-widest shadow-lg hover:bg-blue-700 transition mt-4">Register Now</button>
             </form>
@@ -84,15 +84,15 @@
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <h2 class="text-3xl font-black uppercase mb-2">Welcome Back</h2>
-            <p class="text-gray-500 text-sm mb-8">Access your investment terminal.</p>
+            <p class="text-gray-500 text-sm mb-8">Access your private investment hub.</p>
             <form id="loginForm" class="space-y-4">
                 <div>
                     <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 ml-2">Email Address</label>
-                    <input type="email" id="loginEmail" placeholder="name@email.com" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition">
+                    <input type="email" id="loginEmail" placeholder="name@email.com" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition text-sm">
                 </div>
                 <div>
                     <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1 ml-2">Password</label>
-                    <input type="password" placeholder="••••••••" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition">
+                    <input type="password" placeholder="••••••••" required class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl focus:outline-none focus:border-blue-500 transition text-sm">
                 </div>
                 <button type="submit" class="w-full py-5 bg-[#2b59ff] text-white rounded-2xl font-black uppercase tracking-widest shadow-lg hover:bg-blue-700 transition mt-4">Sign In</button>
             </form>
@@ -110,7 +110,7 @@
         </div>
         <nav class="p-6 space-y-6 flex-1 overflow-y-auto">
             <div class="space-y-3">
-                <button onclick="openModal('signup')" class="w-full py-4 px-6 bg-[#2b59ff] text-white rounded-2xl font-bold text-center uppercase tracking-wide">Sign up</button>
+                <button onclick="openModal('signup')" class="w-full py-4 px-6 bg-[#2b59ff] text-white rounded-2xl font-bold text-center uppercase tracking-wide">Create Account</button>
                 <button onclick="openModal('login')" class="w-full py-4 px-6 bg-gray-100 text-gray-900 rounded-2xl font-bold text-center uppercase tracking-wide">Sign in</button>
             </div>
         </nav>
@@ -123,7 +123,7 @@
                 <span class="text-xl font-bold tracking-tight">fatCoinCapital</span>
             </div>
             <div class="flex items-center gap-3">
-                <button onclick="openModal('signup')" class="bg-[#2b59ff] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-blue-700 transition">Sign Up</button>
+                <button onclick="openModal('signup')" class="bg-[#2b59ff] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-blue-700 transition">Get Started</button>
                 <button onclick="toggleMenu()" class="p-2.5 text-gray-800 bg-gray-50 rounded-xl border border-gray-200">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
@@ -133,18 +133,18 @@
 
     <main id="mainContent" class="max-w-6xl mx-auto px-4 pb-24">
         
-        <!-- Portfolio -->
+        <!-- Portfolio Hero Section -->
         <div class="pt-8 mb-10">
             <div class="relative bg-[#0a0b0d] rounded-[2.5rem] p-10 text-white shadow-2xl border border-gray-800 overflow-hidden">
                 <div class="flex justify-between items-center mb-6">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-bold">?</div>
                         <div>
-                            <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest leading-none mb-1">Guest Terminal</p>
-                            <h2 class="text-sm font-black uppercase tracking-tight">Institutional Preview</h2>
+                            <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest leading-none mb-1">Guest Session</p>
+                            <h2 class="text-sm font-black uppercase tracking-tight">Portfolio Preview</h2>
                         </div>
                     </div>
-                    <span class="text-[10px] font-black bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full border border-blue-500/20 uppercase tracking-widest">Awaiting Auth</span>
+                    <span class="text-[10px] font-black bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full border border-blue-500/20 uppercase tracking-widest">Login Required</span>
                 </div>
 
                 <div class="py-6">
@@ -152,20 +152,21 @@
                     <h1 class="text-6xl font-black uppercase tracking-tighter text-gray-800 select-none">$ ••••••••</h1>
                 </div>
 
+                <!-- UPDATED LOCK OVERLAY -->
                 <div class="absolute inset-0 blur-lock flex flex-col items-center justify-center p-6 text-center z-10">
-                    <h3 class="text-xl font-black uppercase mb-4 tracking-tighter">Access Your Investment Portfolio</h3>
-                    <p class="text-gray-300 text-xs mb-8 max-w-xs font-medium uppercase tracking-wide">Connect to the terminal to view active balances and live compounding cycles.</p>
+                    <h3 class="text-xl font-black uppercase mb-4 tracking-tighter">UNLOCK YOUR PRIVATE WEALTH HUB</h3>
+                    <p class="text-gray-300 text-xs mb-8 max-w-xs font-medium uppercase tracking-wide">Securely enter your dashboard to monitor growth and manage your elite assets in real-time.</p>
                     <div class="flex gap-4">
-                        <button onclick="openModal('signup')" class="px-8 py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-xl hover:scale-105 transition">Initialize Account</button>
+                        <button onclick="openModal('signup')" class="px-8 py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-xl hover:scale-105 transition">Create Account</button>
                         <button onclick="openModal('login')" class="px-8 py-4 bg-white/10 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] border border-white/20 hover:bg-white/20 transition">Log In</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ASSETS SECTION - SIDE SLIDE -->
+        <!-- ASSETS SECTION -->
         <div class="space-y-4">
-            <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 ml-4 mb-6">Real-Time Intelligence</h3>
+            <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 ml-4 mb-6">Real-Time Insights</h3>
             
             <div class="asset-slider-container">
                 <!-- Bitcoin Card -->
@@ -193,35 +194,22 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Solana Card -->
-                <div class="market-terminal p-6 md:p-10 shadow-2xl">
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                        <div class="lg:col-span-2">
-                            <gecko-coin-ticker-widget coin-id="solana" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-ticker-widget>
-                        </div>
-                        <div class="lg:col-span-1 bg-white/5 p-6 rounded-3xl border border-gray-800">
-                            <button onclick="openModal('signup')" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-black uppercase text-[10px] tracking-widest mb-4">Trade SOL</button>
-                            <gecko-coin-converter-widget coin-id="solana" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-converter-widget>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- News Feed -->
         <div class="bg-[#0a0a0a] text-white rounded-[2.5rem] px-8 py-10 mb-16 shadow-2xl mt-12">
             <div class="flex justify-between items-center mb-8">
-                <h3 class="text-2xl font-black uppercase">Daily News Feed</h3>
+                <h3 class="text-2xl font-black uppercase">Market Intel Feed</h3>
                 <span class="flex items-center gap-2 text-[11px] font-bold text-blue-400 uppercase">
-                    <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> Streaming Live News
+                    <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> Streaming Live Updates
                 </span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-white/5 border border-gray-800 p-6 rounded-[2rem]">
                     <span class="text-[10px] bg-red-500/20 text-red-400 px-2 py-1 rounded font-bold mb-3 inline-block">CRITICAL</span>
                     <h4 class="font-bold text-white mb-2 uppercase">Drift Heist</h4>
-                    <p class="text-gray-400 text-xs">Major exploit on Solana triggers investigation.</p>
+                    <p class="text-gray-400 text-xs">Major exploit triggers market investigation.</p>
                 </div>
                 <div class="bg-white/5 border border-gray-800 p-6 rounded-[2rem]">
                     <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-1 rounded font-bold mb-3 inline-block">INSTITUTIONAL</span>
@@ -231,38 +219,7 @@
                 <div class="bg-white/5 border border-gray-800 p-6 rounded-[2rem]">
                     <span class="text-[10px] bg-green-500/20 text-green-400 px-2 py-1 rounded font-bold mb-3 inline-block">ANALYSIS</span>
                     <h4 class="font-bold text-white mb-2 uppercase">Consolidation</h4>
-                    <p class="text-gray-400 text-xs">Market weighs geopolitical tensions.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Feed Cards -->
-        <div class="mb-20">
-            <h3 class="text-3xl font-black uppercase mb-10 text-center tracking-tighter">Terminal Intelligence Feed</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="feed-card shadow-lg">
-                    <img src="asset-growth.png" alt="Asset Growth" class="w-full aspect-video object-cover">
-                    <div class="p-8">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                            <p class="text-[10px] font-black uppercase text-gray-400 tracking-widest">Performance Update</p>
-                        </div>
-                        <h4 class="text-2xl font-black uppercase mb-3">Compounding Velocity</h4>
-                        <p class="text-gray-500 text-sm leading-relaxed mb-6 font-medium">Automated capital velocity management for every 7-day cycle.</p>
-                        <button onclick="openModal('signup')" class="text-blue-600 font-black uppercase text-xs tracking-widest underline">Unlock Strategy</button>
-                    </div>
-                </div>
-                <div class="feed-card shadow-lg">
-                    <img src="arbitrage-logic.png" alt="Arbitrage Logic" class="w-full aspect-video object-cover">
-                    <div class="p-8">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                            <p class="text-[10px] font-black uppercase text-gray-400 tracking-widest">Strategy Blueprint</p>
-                        </div>
-                        <h4 class="text-2xl font-black uppercase mb-3">Liquidity Arbitrage</h4>
-                        <p class="text-gray-500 text-sm leading-relaxed mb-6 font-medium">Capitalizing on market spreads via 14 top-tier liquidity providers.</p>
-                        <button onclick="openModal('signup')" class="text-blue-600 font-black uppercase text-xs tracking-widest underline">Unlock Strategy</button>
-                    </div>
+                    <p class="text-gray-400 text-xs">Market weighs global asset shifts.</p>
                 </div>
             </div>
         </div>
@@ -271,29 +228,29 @@
         <div class="bg-black text-white py-4 rounded-2xl mb-16 overflow-hidden border-y border-blue-500/20">
             <div id="scrollingTicker" class="ticker-content font-bold text-xs tracking-widest uppercase">
                 <span class="mx-10 text-blue-500">LIVE FEED:</span>
-                <span>BTC TRADING AT $66,804.14</span>
-                <span class="mx-10 text-green-400">CLAIM <span class="liveBonusText">$200</span> BONUS ON SIGN-UP</span>
+                <span>SECURE TRADING ACTIVE</span>
+                <span class="mx-10 text-green-400">CLAIM <span class="liveBonusText">$200</span> BONUS ON REGISTRATION</span>
             </div>
         </div>
 
         <!-- Workflow -->
         <div class="mb-10">
-            <h3 class="text-3xl font-black mb-10 text-center uppercase tracking-tighter">Institutional Workflow</h3>
+            <h3 class="text-3xl font-black mb-10 text-center uppercase tracking-tighter">Your Journey</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div onclick="openModal('signup')" class="cursor-pointer p-8 rounded-[2.5rem] bg-[#2b59ff] text-white shadow-xl hover:scale-[1.02] transition">
                     <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-6">🏛️</div>
-                    <h3 class="font-bold mb-2 uppercase text-sm">1. Digital Infrastructure</h3>
-                    <p class="text-white/80 text-[10px]">Automated performance tracking and secure infra.</p>
+                    <h3 class="font-bold mb-2 uppercase text-sm">1. Secure Infrastructure</h3>
+                    <p class="text-white/80 text-[10px]">Automated performance tracking and elite protection.</p>
                 </div>
                 <div onclick="openModal('signup')" class="cursor-pointer p-8 rounded-[2.5rem] bg-[#2b59ff] text-white shadow-xl hover:scale-[1.02] transition">
                     <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-6">⚙️</div>
-                    <h3 class="font-bold mb-2 uppercase text-sm">2. Smart Engine</h3>
-                    <p class="text-white/80 text-[10px]">Strategic allocation into crypto opportunities.</p>
+                    <h3 class="font-bold mb-2 uppercase text-sm">2. Smart Growth</h3>
+                    <p class="text-white/80 text-[10px]">Strategic allocation into market opportunities.</p>
                 </div>
                 <div onclick="openModal('signup')" class="cursor-pointer p-8 rounded-[2.5rem] bg-[#2b59ff] text-white shadow-xl hover:scale-[1.02] transition">
                     <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-6">🎁</div>
                     <h3 class="font-bold mb-2 uppercase text-sm">3. Instant <span class="liveBonusText">$200</span> Bonus</h3>
-                    <p class="text-white/80 text-[10px]">Starting balance immediately upon registration.</p>
+                    <p class="text-white/80 text-[10px]">Starting balance added upon account creation.</p>
                 </div>
             </div>
         </div>
@@ -306,7 +263,7 @@
                     <div style="height:70vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:20px;">
                         <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:50px; border-radius:3rem; max-width:500px;">
                             <h1 style="font-size:28px; font-weight:900; color:#1e293b; margin-bottom:15px;">SYSTEM UPGRADE</h1>
-                            <p style="color:#64748b; font-size:14px; font-weight:500;">Terminal access is temporarily suspended for institutional maintenance.</p>
+                            <p style="color:#64748b; font-size:14px; font-weight:500;">Access is temporarily suspended for maintenance.</p>
                         </div>
                     </div>
                 `;

@@ -12,10 +12,7 @@
         #sidebar.open { transform: translateX(0); }
         #overlay { transition: opacity 0.3s ease; pointer-events: none; opacity: 0; }
         #overlay.open { pointer-events: auto; opacity: 1; }
-        .modal { transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; opacity: 0; transform: scale(0.95); }
-        .modal.open { pointer-events: auto; opacity: 1; transform: scale(1); }
         
-        /* Matured Slate Backgrounds */
         .page-bg { background-color: #f1f5f9; } 
         
         .asset-slider-container {
@@ -28,7 +25,7 @@
         }
         .asset-slider-container::-webkit-scrollbar { display: none; }
 
-        /* Matured Darkened White Card Style */
+        /* Matured Darkened White Style */
         .market-terminal { 
             flex: 0 0 92%; 
             scroll-snap-align: center; 
@@ -64,9 +61,6 @@
             margin-bottom: 2rem;
             max-width: 260px;
         }
-
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        .ticker-content { display: inline-block; white-space: nowrap; animation: ticker 35s linear infinite; }
     </style>
 </head>
 <body class="page-bg text-slate-900 overflow-x-hidden">
@@ -93,10 +87,9 @@
 
     <main id="mainContent" class="max-w-6xl mx-auto px-4 pb-24">
         
-        <!-- RESTORED 3 WEALTH HUB CARDS -->
+        <!-- HERO SECTION -->
         <div class="pt-8 mb-10">
             <div class="asset-slider-container">
-                <!-- Card 1: Wealth Hub (image_10.png) -->
                 <div class="market-terminal p-8" style="background: linear-gradient(rgba(248,250,252,0.9), rgba(248,250,252,0.9)), url('image_10.png'); background-size: cover;">
                     <div class="relative z-10">
                         <h3 class="hero-title-stack">UNLOCK YOUR<br>PRIVATE<br>WEALTH HUB</h3>
@@ -107,88 +100,60 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Card 2: Rewards (image_11.png) -->
-                <div class="market-terminal p-8" style="background: linear-gradient(rgba(248,250,252,0.9), rgba(248,250,252,0.9)), url('image_11.png'); background-size: cover;">
-                    <div class="relative z-10">
-                        <h3 class="hero-title-stack">ELITE<br>SIGN-UP<br>REWARDS</h3>
-                        <p class="hero-body-stack">NEW MEMBERS RECEIVE AN INSTANT <span class="liveBonusText text-blue-600 font-black">$200</span> ACTIVATION BONUS UPON REGISTRATION.</p>
-                        <button onclick="openModal('signup')" class="w-full py-5 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px]">CLAIM REWARD NOW</button>
-                    </div>
-                </div>
-
-                <!-- Card 3: Security (image_12.png) -->
-                <div class="market-terminal p-8" style="background: linear-gradient(rgba(248,250,252,0.9), rgba(248,250,252,0.9)), url('image_12.png'); background-size: cover;">
-                    <div class="relative z-10">
-                        <h3 class="hero-title-stack">SECURED<br>BANK-GRADE<br>INFRASTRUCTURE</h3>
-                        <p class="hero-body-stack">YOUR ASSETS ARE PROTECTED BY INSTITUTIONAL-GRADE ENCRYPTION AND MULTI-LAYERED SECURITY PROTOCOLS.</p>
-                        <button onclick="openModal('signup')" class="w-full py-5 border border-slate-200 text-slate-600 rounded-2xl font-black uppercase tracking-widest text-[10px] bg-slate-50">VIEW SECURITY DOCS</button>
-                    </div>
-                </div>
+                <!-- Additional Hub Cards (Rewards & Security) would follow here -->
             </div>
         </div>
 
-        <!-- GLOBAL FEATURE CARDS -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-            <div class="bg-[#f8fafc] border border-slate-200 rounded-[2.5rem] p-10 flex flex-col items-center text-center shadow-sm" style="background: linear-gradient(rgba(248,250,252,0.8), rgba(248,250,252,0.8)), url('image_13.png'); background-size: cover;">
-                <h4 class="text-xl font-black uppercase text-slate-800 mb-4 tracking-tighter">Global Reach</h4>
-                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Access international markets with local-grade security and speed.</p>
-            </div>
-            <div class="bg-[#f8fafc] border border-slate-200 rounded-[2.5rem] p-10 flex flex-col items-center text-center shadow-sm" style="background: linear-gradient(rgba(248,250,252,0.8), rgba(248,250,252,0.8)), url('image_14.png'); background-size: cover;">
-                <h4 class="text-xl font-black uppercase text-slate-800 mb-4 tracking-tighter">Smart Analytics</h4>
-                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Advanced portfolio tracking powered by real-time institutional data.</p>
-            </div>
-        </div>
-
-        <!-- RESTORED 4 ASSET CARDS -->
-        <div class="space-y-4">
+        <!-- 4 ACTIVE ASSET CARDS -->
+        <div class="space-y-4 mb-12">
             <h3 class="text-xs font-black uppercase tracking-[0.3em] text-slate-400 ml-4 mb-6">Market Terminals</h3>
             <div class="asset-slider-container">
-                <!-- BTC -->
+                <!-- Bitcoin -->
                 <div class="market-terminal p-6 md:p-10">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                         <div class="lg:col-span-2"><gecko-coin-ticker-widget coin-id="bitcoin" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-ticker-widget></div>
-                        <div class="lg:col-span-1 bg-white p-6 rounded-3xl border border-slate-200"><button onclick="openModal('signup')" class="w-full py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase text-[10px] tracking-widest mb-4">Trade BTC</button><gecko-coin-converter-widget coin-id="bitcoin" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-converter-widget></div>
+                        <div class="lg:col-span-1 bg-white p-6 rounded-3xl border border-slate-200">
+                            <button class="w-full py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase text-[10px] tracking-widest mb-4">Trade BTC</button>
+                            <gecko-coin-converter-widget coin-id="bitcoin" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-converter-widget>
+                        </div>
                     </div>
                 </div>
-                <!-- ETH -->
+                <!-- Ethereum -->
                 <div class="market-terminal p-6 md:p-10">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                         <div class="lg:col-span-2"><gecko-coin-ticker-widget coin-id="ethereum" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-ticker-widget></div>
-                        <div class="lg:col-span-1 bg-white p-6 rounded-3xl border border-slate-200"><button onclick="openModal('signup')" class="w-full py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase text-[10px] tracking-widest mb-4">Trade ETH</button><gecko-coin-converter-widget coin-id="ethereum" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-converter-widget></div>
+                        <div class="lg:col-span-1 bg-white p-6 rounded-3xl border border-slate-200">
+                            <button class="w-full py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase text-[10px] tracking-widest mb-4">Trade ETH</button>
+                            <gecko-coin-converter-widget coin-id="ethereum" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-converter-widget>
+                        </div>
                     </div>
                 </div>
-                <!-- SOL -->
+                <!-- Solana -->
                 <div class="market-terminal p-6 md:p-10">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                         <div class="lg:col-span-2"><gecko-coin-ticker-widget coin-id="solana" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-ticker-widget></div>
-                        <div class="lg:col-span-1 bg-white p-6 rounded-3xl border border-slate-200"><button onclick="openModal('signup')" class="w-full py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase text-[10px] tracking-widest mb-4">Trade SOL</button><gecko-coin-converter-widget coin-id="solana" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-converter-widget></div>
+                        <div class="lg:col-span-1 bg-white p-6 rounded-3xl border border-slate-200">
+                            <button class="w-full py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase text-[10px] tracking-widest mb-4">Trade SOL</button>
+                            <gecko-coin-converter-widget coin-id="solana" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-converter-widget>
+                        </div>
                     </div>
                 </div>
-                <!-- XAUT -->
+                <!-- Tether Gold -->
                 <div class="market-terminal p-6 md:p-10">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                         <div class="lg:col-span-2"><gecko-coin-ticker-widget coin-id="tether-gold" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-ticker-widget></div>
-                        <div class="lg:col-span-1 bg-white p-6 rounded-3xl border border-slate-200"><button onclick="openModal('signup')" class="w-full py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase text-[10px] tracking-widest mb-4">Trade XAUT</button><gecko-coin-converter-widget coin-id="tether-gold" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-converter-widget></div>
+                        <div class="lg:col-span-1 bg-white p-6 rounded-3xl border border-slate-200">
+                            <button class="w-full py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase text-[10px] tracking-widest mb-4">Trade XAUT</button>
+                            <gecko-coin-converter-widget coin-id="tether-gold" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-converter-widget>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Intel Feed -->
-        <div class="bg-[#f8fafc] rounded-[2.5rem] px-8 py-10 mb-16 shadow-md border border-slate-200 mt-12">
-            <h3 class="text-2xl font-black uppercase text-slate-800 mb-8">Market Intel Feed</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white border border-slate-200 p-6 rounded-[2rem]"><span class="text-[10px] bg-red-100 text-red-600 px-2 py-1 rounded font-bold mb-3 inline-block">CRITICAL</span><h4 class="font-bold text-sm mb-2 uppercase">Drift Heist</h4><p class="text-slate-500 text-xs">Major exploit triggers market investigation.</p></div>
-                <div class="bg-white border border-slate-200 p-6 rounded-[2rem]"><span class="text-[10px] bg-blue-100 text-blue-600 px-2 py-1 rounded font-bold mb-3 inline-block">INSTITUTIONAL</span><h4 class="font-bold text-sm mb-2 uppercase">Morgan Stanley</h4><p class="text-slate-500 text-xs">ETF launch boosts liquidity expectations.</p></div>
-                <div class="bg-white border border-slate-200 p-6 rounded-[2rem]"><span class="text-[10px] bg-green-100 text-green-600 px-2 py-1 rounded font-bold mb-3 inline-block">ANALYSIS</span><h4 class="font-bold text-sm mb-2 uppercase">Consolidation</h4><p class="text-slate-500 text-xs">Market weighs global asset shifts.</p></div>
             </div>
         </div>
     </main>
 
     <script>
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('open'); }
-        function openModal(type) { closeAll(); document.getElementById(type + 'Modal').classList.add('open'); document.getElementById('overlay').classList.add('open'); }
         function closeAll() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); }
     </script>
 </body>

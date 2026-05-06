@@ -30,7 +30,7 @@
         }
         .asset-slider-container::-webkit-scrollbar { display: none; }
 
-        /* Unified Card Style for Hero and Assets */
+        /* Unified Card Style for Hero and Assets - DARK ACCENTS */
         .market-terminal { 
             flex: 0 0 92%; 
             scroll-snap-align: center; 
@@ -42,6 +42,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative; /* Essential for absolute video/image children */
         }
 
         .hero-title-stack {
@@ -127,7 +128,7 @@
         <nav class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <div class="w-8 h-8 bg-[#2b59ff] rounded-full flex items-center justify-center text-white font-bold text-sm">f</div>
-                <span class="text-xl font-bold tracking-tight">fatCoinCapital</span>
+                <span class="text-xl font-bold tracking-tight text-gray-900">fatCoinCapital</span>
             </div>
             <div class="flex items-center gap-3">
                 <button onclick="openModal('signup')" class="bg-[#2b59ff] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-blue-700 transition">Get Started</button>
@@ -140,42 +141,52 @@
 
     <main id="mainContent" class="max-w-6xl mx-auto px-4 pb-24">
         
-        <!-- UPGRADED HERO SECTION - THREE STACKED SIDE SCROLLING CARDS -->
+        <!-- UPGRADED HERO SECTION - WHITE BG WITH DARK ACCENT IMAGE CARDS -->
         <div class="pt-8 mb-10">
             <div class="asset-slider-container">
-                <!-- Card 1: Main CTA -->
-                <div class="market-terminal p-8">
-                    <h3 class="hero-title-stack">UNLOCK YOUR<br>PRIVATE<br>WEALTH HUB</h3>
-                    <p class="hero-body-stack">SECURELY ENTER YOUR DASHBOARD TO MONITOR GROWTH AND MANAGE YOUR ELITE ASSETS IN REAL-TIME.</p>
-                    <div class="space-y-3">
-                        <button onclick="openModal('signup')" class="w-full py-5 bg-[#2b59ff] text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-xl">Create Account</button>
-                        <button onclick="openModal('login')" class="w-full py-5 bg-white/5 text-white border border-white/10 rounded-2xl font-black uppercase tracking-widest text-[10px]">Log In</button>
+                <!-- Card 1: Main CTA (Image Background) -->
+                <div class="market-terminal p-8" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('image_8.png'); background-size: cover; background-position: center;">
+                    <div class="relative z-10">
+                        <h3 class="hero-title-stack">UNLOCK YOUR<br>PRIVATE<br>WEALTH HUB</h3>
+                        <p class="hero-body-stack">SECURELY ENTER YOUR DASHBOARD TO MONITOR GROWTH AND MANAGE YOUR ELITE ASSETS IN REAL-TIME.</p>
+                        <div class="space-y-3">
+                            <button onclick="openModal('signup')" class="w-full py-5 bg-[#2b59ff] text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-xl">Create Account</button>
+                            <button onclick="openModal('login')" class="w-full py-5 bg-white/10 text-white border border-white/20 backdrop-blur-md rounded-2xl font-black uppercase tracking-widest text-[10px]">Log In</button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Card 2: Exclusive Rewards -->
-                <div class="market-terminal p-8">
-                    <h3 class="hero-title-stack">ELITE<br>SIGN-UP<br>REWARDS</h3>
-                    <p class="hero-body-stack">NEW MEMBERS RECEIVE AN INSTANT <span class="liveBonusText text-blue-400">$200</span> ACTIVATION BONUS UPON SUCCESSFUL REGISTRATION.</p>
-                    <button onclick="openModal('signup')" class="w-full py-5 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-lg">CLAIM REWARD NOW</button>
+                <!-- Card 2: Exclusive Rewards (Image Background) -->
+                <div class="market-terminal p-8" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('image_9.png'); background-size: cover; background-position: center;">
+                    <div class="relative z-10">
+                        <h3 class="hero-title-stack">ELITE<br>SIGN-UP<br>REWARDS</h3>
+                        <p class="hero-body-stack">NEW MEMBERS RECEIVE AN INSTANT <span class="liveBonusText text-blue-400">$200</span> ACTIVATION BONUS UPON SUCCESSFUL REGISTRATION.</p>
+                        <button onclick="openModal('signup')" class="w-full py-5 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-lg">CLAIM REWARD NOW</button>
+                    </div>
                 </div>
 
-                <!-- Card 3: Institutional Security -->
-                <div class="market-terminal p-8">
-                    <h3 class="hero-title-stack">SECURED<br>BANK-GRADE<br>INFRASTRUCTURE</h3>
-                    <p class="hero-body-stack">YOUR ASSETS ARE PROTECTED BY INSTITUTIONAL-GRADE ENCRYPTION AND MULTI-LAYERED SECURITY PROTOCOLS.</p>
-                    <button onclick="openModal('signup')" class="w-full py-5 border border-blue-500/30 text-blue-400 rounded-2xl font-black uppercase tracking-widest text-[10px]">VIEW SECURITY DOCS</button>
+                <!-- Card 3: Institutional Security (Video Loop) -->
+                <div class="market-terminal p-8 overflow-hidden">
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+                        <source src="ScreenRecording_05-05-2026 20-32-48_1.mov" type="video/quicktime">
+                    </video>
+                    <div class="absolute inset-0 bg-black/60 z-0"></div>
+                    <div class="relative z-10">
+                        <h3 class="hero-title-stack">SECURED<br>BANK-GRADE<br>INFRASTRUCTURE</h3>
+                        <p class="hero-body-stack">YOUR ASSETS ARE PROTECTED BY INSTITUTIONAL-GRADE ENCRYPTION AND MULTI-LAYERED SECURITY PROTOCOLS.</p>
+                        <button onclick="openModal('signup')" class="w-full py-5 border border-blue-500/30 text-blue-400 rounded-2xl font-black uppercase tracking-widest text-[10px] bg-black/40 backdrop-blur-sm">VIEW SECURITY DOCS</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ASSETS SECTION -->
+        <!-- ASSETS SECTION - LIGHT CANVAS WITH DARK CARDS -->
         <div class="space-y-4">
             <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 ml-4 mb-6">Real-Time Insights</h3>
             
             <div class="asset-slider-container">
                 <!-- Bitcoin Card -->
-                <div class="market-terminal p-6 md:p-10 shadow-2xl">
+                <div class="market-terminal p-6 md:p-10 shadow-2xl bg-[#0a0b0d]">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                         <div class="lg:col-span-2"><gecko-coin-ticker-widget coin-id="bitcoin" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-ticker-widget></div>
                         <div class="lg:col-span-1 bg-white/5 p-6 rounded-3xl border border-gray-800 mt-4 lg:mt-0">
@@ -186,7 +197,7 @@
                 </div>
 
                 <!-- Ethereum Card -->
-                <div class="market-terminal p-6 md:p-10 shadow-2xl">
+                <div class="market-terminal p-6 md:p-10 shadow-2xl bg-[#0a0b0d]">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                         <div class="lg:col-span-2"><gecko-coin-ticker-widget coin-id="ethereum" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-ticker-widget></div>
                         <div class="lg:col-span-1 bg-white/5 p-6 rounded-3xl border border-gray-800 mt-4 lg:mt-0">
@@ -197,7 +208,7 @@
                 </div>
 
                 <!-- Solana Card -->
-                <div class="market-terminal p-6 md:p-10 shadow-2xl">
+                <div class="market-terminal p-6 md:p-10 shadow-2xl bg-[#0a0b0d]">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                         <div class="lg:col-span-2"><gecko-coin-ticker-widget coin-id="solana" initial-currency="usd" locale="en" dark-mode="true" transparent-background="true"></gecko-coin-ticker-widget></div>
                         <div class="lg:col-span-1 bg-white/5 p-6 rounded-3xl border border-gray-800 mt-4 lg:mt-0">

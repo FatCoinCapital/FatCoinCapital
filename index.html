@@ -15,7 +15,7 @@
             scroll-behavior: smooth;
         }
 
-        /* SIDEBAR FIXED LOGIC */
+        /* SIDEBAR LOGIC */
         #sidebar { 
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
             transform: translateX(100%); 
@@ -27,13 +27,14 @@
             transition: opacity 0.3s ease; 
             pointer-events: none; 
             opacity: 0; 
-            background: rgba(15, 23, 42, 0.5); /* Matured slate overlay */
+            background: rgba(15, 23, 42, 0.5);
         }
         #overlay.open { pointer-events: auto; opacity: 1; }
 
         .modal { transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; opacity: 0; transform: scale(0.95); position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 1rem; }
         .modal.open { pointer-events: auto; opacity: 1; transform: scale(1); }
 
+        /* SLIDER SETTINGS */
         .asset-slider-container {
             display: flex;
             overflow-x: auto;
@@ -94,29 +95,29 @@
         </div>
         
         <nav class="space-y-4 flex-grow">
-            <a href="#" onclick="closeAll()" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+            <a href="#" onclick="closeAll()" class="block p-4 rounded-2xl hover:bg-slate-50 transition-colors">
                 <span class="text-lg font-extrabold uppercase tracking-tighter text-slate-900">Home</span>
             </a>
-            <a href="#" onclick="closeAll()" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+            <a href="#" onclick="closeAll()" class="block p-4 rounded-2xl hover:bg-slate-50 transition-colors">
                 <span class="text-lg font-extrabold uppercase tracking-tighter text-slate-900">Dashboard</span>
             </a>
-            <a href="#" onclick="closeAll()" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+            <a href="#" onclick="closeAll()" class="block p-4 rounded-2xl hover:bg-slate-50 transition-colors">
                 <span class="text-lg font-extrabold uppercase tracking-tighter text-slate-900">Account Settings</span>
             </a>
-            <a href="#" onclick="closeAll()" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+            <a href="#" onclick="closeAll()" class="block p-4 rounded-2xl hover:bg-slate-50 transition-colors">
                 <span class="text-lg font-extrabold uppercase tracking-tighter text-slate-900">Chat Support</span>
             </a>
         </nav>
 
         <div class="pt-8 border-t border-slate-100">
             <button onclick="location.reload()" class="w-full py-5 bg-red-50 text-red-600 rounded-2xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-2">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                 Logout
             </button>
         </div>
     </aside>
 
     <main class="max-w-6xl mx-auto px-4 pb-20">
+        
         <div class="pt-6 mb-8">
             <div class="asset-slider-container">
                 <div class="market-terminal p-8">
@@ -127,7 +128,17 @@
                         <button onclick="openModal('login')" class="w-full py-5 bg-white border border-slate-200 text-slate-900 rounded-2xl font-black uppercase tracking-widest text-[10px]">Log In</button>
                     </div>
                 </div>
+                <div class="market-terminal p-8">
+                    <h3 class="hero-title-stack">ELITE<br>SIGN-UP<br>REWARDS</h3>
+                    <p class="hero-body-stack">NEW MEMBERS RECEIVE AN INSTANT <span class="text-blue-600 font-black">$200</span> ACTIVATION BONUS.</p>
+                    <button onclick="openModal('signup')" class="w-full py-5 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px]">CLAIM REWARD NOW</button>
                 </div>
+                <div class="market-terminal p-8">
+                    <h3 class="hero-title-stack">SECURED<br>BANK-GRADE<br>INFRASTRUCTURE</h3>
+                    <p class="hero-body-stack">YOUR ASSETS ARE PROTECTED BY INSTITUTIONAL-GRADE ENCRYPTION PROTOCOLS.</p>
+                    <button onclick="openModal('signup')" class="w-full py-5 border border-slate-200 text-slate-600 rounded-2xl font-black uppercase tracking-widest text-[10px] bg-slate-50">VIEW SECURITY DOCS</button>
+                </div>
+            </div>
         </div>
 
         <div class="space-y-4">
@@ -140,7 +151,28 @@
                         <gecko-coin-converter-widget coin-id="bitcoin" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-converter-widget>
                     </div>
                 </div>
+                <div class="market-terminal p-6">
+                    <gecko-coin-ticker-widget coin-id="ethereum" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-ticker-widget>
+                    <div class="bg-white p-4 rounded-3xl border border-slate-200 mt-6">
+                        <button onclick="openModal('signup')" class="w-full py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase text-[10px] tracking-widest mb-4">Trade ETH</button>
+                        <gecko-coin-converter-widget coin-id="ethereum" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-converter-widget>
+                    </div>
                 </div>
+                <div class="market-terminal p-6">
+                    <gecko-coin-ticker-widget coin-id="solana" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-ticker-widget>
+                    <div class="bg-white p-4 rounded-3xl border border-slate-200 mt-6">
+                        <button onclick="openModal('signup')" class="w-full py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase text-[10px] tracking-widest mb-4">Trade SOL</button>
+                        <gecko-coin-converter-widget coin-id="solana" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-converter-widget>
+                    </div>
+                </div>
+                <div class="market-terminal p-6">
+                    <gecko-coin-ticker-widget coin-id="tether-gold" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-ticker-widget>
+                    <div class="bg-white p-4 rounded-3xl border border-slate-200 mt-6">
+                        <button onclick="openModal('signup')" class="w-full py-4 bg-[#2b59ff] text-white rounded-2xl font-black uppercase text-[10px] tracking-widest mb-4">Trade XAUT</button>
+                        <gecko-coin-converter-widget coin-id="tether-gold" initial-currency="usd" locale="en" dark-mode="false" transparent-background="true"></gecko-coin-converter-widget>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -148,17 +180,24 @@
         <div class="bg-white w-full max-w-sm p-8 rounded-[2.5rem] shadow-2xl relative">
             <button onclick="closeAll()" class="absolute top-6 right-6 text-slate-400">✕</button>
             <h2 class="text-2xl font-black uppercase mb-2">Join the Elite</h2>
-            <input type="email" placeholder="EMAIL ADDRESS" class="w-full p-5 bg-slate-50 border border-slate-200 rounded-2xl mb-4 text-[10px] font-black tracking-widest uppercase outline-none focus:border-blue-500">
+            <input type="email" placeholder="EMAIL ADDRESS" class="w-full p-5 bg-slate-50 border border-slate-200 rounded-2xl mb-4 text-[10px] font-black tracking-widest uppercase outline-none">
             <button class="w-full py-5 bg-[#2b59ff] text-white rounded-2xl font-black uppercase tracking-widest text-[10px]">Initialize Account</button>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="bg-white w-full max-w-sm p-8 rounded-[2.5rem] shadow-2xl relative">
+            <button onclick="closeAll()" class="absolute top-6 right-6 text-slate-400">✕</button>
+            <h2 class="text-2xl font-black uppercase mb-2">Welcome Back</h2>
+            <input type="text" placeholder="USER ID" class="w-full p-5 bg-slate-50 border border-slate-200 rounded-2xl mb-4 text-[10px] font-black tracking-widest uppercase outline-none">
+            <button class="w-full py-5 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-[10px]">Login</button>
         </div>
     </div>
 
     <script>
         function toggleMenu() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('open');
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('open');
         }
 
         function openModal(type) {
@@ -172,7 +211,7 @@
         function closeAll() {
             document.getElementById('sidebar').classList.remove('open');
             document.getElementById('signupModal').classList.remove('open');
-            if(document.getElementById('loginModal')) document.getElementById('loginModal').classList.remove('open');
+            document.getElementById('loginModal').classList.remove('open');
             document.getElementById('overlay').classList.remove('open');
         }
     </script>

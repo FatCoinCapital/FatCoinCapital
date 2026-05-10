@@ -31,7 +31,20 @@
         }
         #overlay.open { pointer-events: auto; opacity: 1; }
 
-        .modal { transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; opacity: 0; transform: scale(0.95); position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+        /* MODAL ANIMATION */
+        .modal { 
+            transition: opacity 0.3s ease, transform 0.3s ease; 
+            pointer-events: none; 
+            opacity: 0; 
+            transform: scale(0.95); 
+            position: fixed; 
+            inset: 0; 
+            z-index: 100; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 1rem; 
+        }
         .modal.open { pointer-events: auto; opacity: 1; transform: scale(1); }
 
         /* SLIDER SETTINGS */
@@ -95,22 +108,22 @@
         </div>
         
         <nav class="space-y-4 flex-grow">
-            <a href="#" onclick="closeAll()" class="block p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+            <button onclick="openModal('signup')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-50 transition-colors">
                 <span class="text-lg font-extrabold uppercase tracking-tighter text-slate-900">Home</span>
-            </a>
-            <a href="#" onclick="closeAll()" class="block p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+            </button>
+            <button onclick="openModal('login')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-50 transition-colors">
                 <span class="text-lg font-extrabold uppercase tracking-tighter text-slate-900">Dashboard</span>
-            </a>
-            <a href="#" onclick="closeAll()" class="block p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+            </button>
+            <button onclick="openModal('signup')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-50 transition-colors">
                 <span class="text-lg font-extrabold uppercase tracking-tighter text-slate-900">Account Settings</span>
-            </a>
-            <a href="#" onclick="closeAll()" class="block p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+            </button>
+            <button onclick="openModal('signup')" class="w-full text-left p-4 rounded-2xl hover:bg-slate-50 transition-colors">
                 <span class="text-lg font-extrabold uppercase tracking-tighter text-slate-900">Chat Support</span>
-            </a>
+            </button>
         </nav>
 
         <div class="pt-8 border-t border-slate-100">
-            <button onclick="location.reload()" class="w-full py-5 bg-red-50 text-red-600 rounded-2xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-2">
+            <button onclick="openModal('login')" class="w-full py-5 bg-red-50 text-red-600 rounded-2xl font-black uppercase tracking-widest text-[10px]">
                 Logout
             </button>
         </div>
@@ -180,7 +193,8 @@
         <div class="bg-white w-full max-w-sm p-8 rounded-[2.5rem] shadow-2xl relative">
             <button onclick="closeAll()" class="absolute top-6 right-6 text-slate-400">✕</button>
             <h2 class="text-2xl font-black uppercase mb-2">Join the Elite</h2>
-            <input type="email" placeholder="EMAIL ADDRESS" class="w-full p-5 bg-slate-50 border border-slate-200 rounded-2xl mb-4 text-[10px] font-black tracking-widest uppercase outline-none">
+            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-6">Create your institutional account</p>
+            <input type="email" placeholder="EMAIL ADDRESS" class="w-full p-5 bg-slate-50 border border-slate-200 rounded-2xl mb-4 text-[10px] font-black tracking-widest uppercase outline-none focus:border-[#2b59ff]">
             <button class="w-full py-5 bg-[#2b59ff] text-white rounded-2xl font-black uppercase tracking-widest text-[10px]">Initialize Account</button>
         </div>
     </div>
@@ -189,8 +203,9 @@
         <div class="bg-white w-full max-w-sm p-8 rounded-[2.5rem] shadow-2xl relative">
             <button onclick="closeAll()" class="absolute top-6 right-6 text-slate-400">✕</button>
             <h2 class="text-2xl font-black uppercase mb-2">Welcome Back</h2>
-            <input type="text" placeholder="USER ID" class="w-full p-5 bg-slate-50 border border-slate-200 rounded-2xl mb-4 text-[10px] font-black tracking-widest uppercase outline-none">
-            <button class="w-full py-5 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-[10px]">Login</button>
+            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-6">Enter your private terminal</p>
+            <input type="text" placeholder="USER ID" class="w-full p-5 bg-slate-50 border border-slate-200 rounded-2xl mb-4 text-[10px] font-black tracking-widest uppercase outline-none focus:border-slate-900">
+            <button class="w-full py-5 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-[10px]">Secure Login</button>
         </div>
     </div>
 
@@ -201,11 +216,11 @@
         }
 
         function openModal(type) {
-            closeAll();
+            closeAll(); // Close sidebar if it's open
             setTimeout(() => {
                 document.getElementById(type + 'Modal').classList.add('open');
                 document.getElementById('overlay').classList.add('open');
-            }, 50);
+            }, 100);
         }
 
         function closeAll() {

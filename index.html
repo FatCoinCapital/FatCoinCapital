@@ -183,7 +183,7 @@
         <div class="bg-white w-full max-w-sm p-8 rounded-[2.5rem] shadow-2xl relative">
             <button onclick="closeAll()" class="absolute top-6 right-6 text-slate-400">✕</button>
             <h2 class="text-2xl font-black uppercase mb-2">Join the Elite</h2>
-            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-6">Create account</p>
+            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-6">Create Account</p>
             <form onsubmit="handleAuth(event)">
                 <input required type="text" placeholder="FULL NAME" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl mb-3 text-[10px] font-black tracking-widest uppercase outline-none focus:border-[#2b59ff]">
                 <input required type="email" placeholder="EMAIL ADDRESS" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl mb-3 text-[10px] font-black tracking-widest uppercase outline-none focus:border-[#2b59ff]">
@@ -228,12 +228,13 @@
             document.getElementById('overlay').classList.remove('open');
         }
 
-        // Functional handling: Only refresh when form is validly submitted
+        // REDIRECT LOGIC: Links to your dashboard.html
         function handleAuth(event) {
             event.preventDefault();
             const form = event.target;
             if (form.checkValidity()) {
-                window.location.reload();
+                // Ensure your dashboard file is named exactly 'dashboard.html'
+                window.location.href = 'dashboard.html'; 
             }
         }
     </script>
